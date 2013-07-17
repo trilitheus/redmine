@@ -6,6 +6,6 @@
 # 
 # All rights reserved - Do Not Redistribute
 #
-%w{postgresql::server subversion redmine::database}.each do |recipe|
+%w{postgresql::server postgresql::ruby subversion redmine::database}.each do |recipe|
   include_recipe recipe
 end 

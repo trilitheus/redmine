@@ -20,5 +20,5 @@ postgresql_database_user "redmine" do
   password "redmine"
   database_name "redmine"
   privileges [:all]
-  action :grant
+  action [:create, :grant]
 end
