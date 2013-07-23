@@ -1,0 +1,24 @@
+<VirtualHost *:80>
+   #ServerName <%= @params[:server_name] %>
+   ServerName redmine
+   #ServerAlias <% @params[:server_aliases].each do |a| %><%= "#{a}" %> <% end %>
+   #DocumentRoot <%= @params[:docroot] %>
+   DocumentRoot /srv/redmine/current/public
+
+   RailsBaseURI /
+   RailsEnv <%= @params[:rails_env] %>
+   RailsAllowModRewrite on
+   #PassengerMaxPoolSize %= @node[:rails][:max_pool_size] %>
+
+   #<Directory <%= @params[:docroot] %>>
+   <Directory /srv/redmine/current/public>
+     Options FollowSymLinks
+     AllowOverride None
+     Order allow,deny
+     Allow from all
+   </Directory>
+
+   LogLevel info
+   #ErrorLog <%= @node[:apache][:log_dir] %>/<%= @params[:name] %>-error.log
+   #CustomLog <%= @node[:apache][:log_dir] %>/<%= @params[:name] %>-access.log combined
+ </VirtualHost>

@@ -1,4 +1,5 @@
 ### Create database and user
+include_recipe "postgresql::ruby"
 
 # define postgresql connection info
 postgresql_connection_info = {
