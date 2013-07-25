@@ -16,13 +16,13 @@ useradd -g redmine -d /srv/redmine -s /bin/bash -m redmine
 EOF
 end
 
-%w{libmagic-dev libmagickwand-dev}.each do |pkg|
+%w{libmagic-dev libmagickwand-dev libmysqlclient-dev}.each do |pkg|
   package pkg do
     action :install
   end
 end
 
-%w{mysql::server subversion application}.each do |recipe|
+%w{mysql::server mysql::ruby subversion application}.each do |recipe|
   include_recipe recipe
 end 
 
@@ -37,9 +37,6 @@ end
 
 ### Create database and user
 # define mysql connection info
-gem_package "mysql"
-chef_gem "mysql2"
-
 mysql_connection_info = {
   :host => "localhost",
   #:port => node[:mysql][:config][:port],
