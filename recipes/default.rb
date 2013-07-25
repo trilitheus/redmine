@@ -22,7 +22,7 @@ end
   end
 end
 
-%w{mysql::server mysql::ruby subversion application}.each do |recipe|
+%w{mysql::server mysql::ruby subversion git application}.each do |recipe|
   include_recipe recipe
 end 
 
