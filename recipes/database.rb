@@ -1,23 +1,23 @@
 ### Create database and user
-include_recipe "postgresql::ruby"
+# define mysql connection info
+gem_package "mysql"
 
-# define postgresql connection info
-postgresql_connection_info = {
+mysql_connection_info = {
   :host => "127.0.0.1",
-  :port => node['postgresql']['config']['port'],
-  :username => 'postgres',
-  :password => node['postgresql']['password']['postgres']
+  #:port => node[:mysql][:config][:port],
+  :username => 'root',
+  :password => node[:mysql][:server_root_password]
 }
 
 # create database
-postgresql_database "redmine" do
-  connection postgresql_connection_info
+mysql_database "redmine" do
+  connection mysql_connection_info
   action :create
 end
 
 # create database user
-postgresql_database_user "redmine" do
-  connection postgresql_connection_info
+mysql_database_user "redmine" do
+  connection mysql_connection_info
   password "redmine"
   database_name "redmine"
   privileges [:all]

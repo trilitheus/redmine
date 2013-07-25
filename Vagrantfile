@@ -87,5 +87,6 @@ Vagrant.configure("2") do |config|
     chef.run_list = [
         "recipe[redmine::default]"
     ]
+  chef.log_level = :debug
   end
 end
