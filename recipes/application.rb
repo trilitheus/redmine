@@ -1,3 +1,21 @@
+# Create shared dir and add config and puma templates
+directory "#{node[:redmine][:homedir]}/shared" do
+  owner "redmine"
+  group "redmine"
+end
+
+template "#{node[:redmine][:homedir]}/shared/configuration.yml" do
+      owner "redmine"
+      group "redmine"
+      mode 00644
+end
+
+template "#{node[:redmine][:homedir]}/shared/puma.rb" do
+      owner "redmine"
+      group "redmine"
+      mode 00644
+end
+
 # Set up and deploy application
 application "redmine" do
   owner "redmine"
@@ -8,6 +26,11 @@ application "redmine" do
   repository "http://svn.redmine.org/redmine/branches/2.3-stable"
   revision "12040"
   migrate true
+  environment "RAILS_ENV" => "production"
+  symlink_before_migrate = { "config/database.yml" => "config/database.yml",
+                             "config/puma.rb" => "config/puma.rb",
+                             "config/application.yml" => "config/application.yml"
+                           }
   action :force_deploy
   rails do
     bundler true
@@ -23,19 +46,26 @@ application "redmine" do
 
   before_migrate do
     # Add mysql to gemfile and reun bundler
-    execute "cd /srv/redmine/releases/12040 && sed -i '2igem \"mysql2\", \"~> 0.3.11\", :platforms => [:mri, :mingw]' Gemfile"
-    execute "cd /srv/redmine/releases/12040 && sed -i '2igem \"activerecord-jdbcmysql-adapter\", :platforms => :jruby' Gemfile"
-    execute "cd /srv/redmine/releases/12040 && /opt/chef/embedded/bin/bundle install --path=/srv/redmine/shared/vendor_bundle --without development test cucumber staging"
-    execute "chown -R redmine:redmine /srv/redmine"
+    #template "#{node[:redmine][:homedir]}/shared/configuration.yml" do
+      #owner "redmine"
+      #group "redmine"
+      #mode 00644
+    #end
+    #template "#{node[:redmine][:homedir]}/releases/#{node[:redmine][:revision]}/Gemfile.local" do
+      #source "Gemfile.local.erb"
+      #owner "redmine"
+      #group "redmine"
+    #end
+    bash "ReRun Bundler" do
+      environment "RAILS_ENV" => "production"
+      cwd "#{node[:redmine][:homedir]}/releases/#{node[:redmine][:revision]}"
+      code <<-EOF
+RAILS_ENV=production bundle install --path=#{node[:redmine][:homedir]} --without development test cucumber staging 
+chown -R redmine:redmine #{node[:redmine][:homedir]}
+EOF
+    end
   end
 
-  passenger_apache2 do
-  end
-end
-
-template "/srv/redmine/current/config/configuration.yml" do
-  owner "redmine"
-  group "redmine"
-  mode 00644
-  action :create
+  #passenger_apache2 do
+  #end
 end
