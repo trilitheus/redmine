@@ -1,6 +1,6 @@
 # This configuration file is managed by CHEF
 upstream redmine {
-  server unix:<%= node[:redmine][:homedir] %>/current/tmp/sockets/redmine.socket;
+  server unix://<%= node[:redmine][:homedir] %>/current/tmp/sockets/redmine.socket;
 }
 
 server {

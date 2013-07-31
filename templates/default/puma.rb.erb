@@ -65,6 +65,6 @@ bind "unix://#{application_path}/tmp/sockets/redmine.socket"
 # Check out https://github.com/puma/puma/blob/master/lib/puma/app/status.rb
 # to see what the app has available.
 #
-# activate_control_app 'unix:///var/run/pumactl.sock'
+activate_control_app "unix://#{application_path}/tmp/pumactl.sock"
 # activate_control_app 'unix:///var/run/pumactl.sock', { auth_token: '12345' }
 # activate_control_app 'unix:///var/run/pumactl.sock', { no_token: true }

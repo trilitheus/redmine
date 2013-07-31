@@ -68,7 +68,28 @@ Vagrant.configure("2") do |config|
 
   # An array of symbols representing groups of cookbook described in the Vagrantfile
   # to skip installing and copying to Vagrant's shelf.
-  # config.berkshelf.except = []
+  config.berkshelf.except = [ :mysql,
+                              :openssl,
+                              :build_essential,
+                              :database,
+                              :postgresql,
+                              :apt,
+                              :aws,
+                              :xfs,
+                              :subversion,
+                              :apache2,
+                              :windows,
+                              :chef_handler,
+                              :application,
+                              :application_ruby,
+                              :unicorn,
+                              :passenger_apache2,
+                              :runit,
+                              :yum,
+                              :ruby_build,
+                              :git,
+                              :dmg
+                            ]
 
   config.vm.provision :chef_solo do |chef|
     chef.json = {

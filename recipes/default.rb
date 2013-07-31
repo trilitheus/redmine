@@ -22,7 +22,7 @@ end
   end
 end
 
-%w{mysql::server mysql::ruby subversion git application ruby_build}.each do |recipe|
+%w{mysql::server mysql::ruby subversion git application ruby_build nginx}.each do |recipe|
   include_recipe recipe
 end 
 
@@ -38,10 +38,12 @@ mysql_connection_info = {
 # install local ruby
 include_recipe 'ruby_build'
 ruby_build_ruby '1.9.3-p362' do
-#    prefix_path '/usr/local/'
+    prefix_path '/usr/local/'
     environment 'CFLAGS' => '-g -O2'
     action :install
 end
+
+gem_package "bundler"
 
 # create database
 mysql_database "redmine" do
