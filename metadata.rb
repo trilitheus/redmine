@@ -10,8 +10,6 @@ version          '0.1.0'
   mysql
   database
   subversion
-  application
-  application_ruby
   ruby_build
   git
   nginx
