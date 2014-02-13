@@ -1,10 +1,12 @@
-### Create database and user
+# Create database and user
+%w{mysql::server mysql::ruby}.each do |recipe|
+  include_recipe recipe
+end
 # define mysql connection info
 gem_package 'mysql'
 
 mysql_connection_info = {
   :host => '127.0.0.1',
-  #:port => node[:mysql][:config][:port],
   :username => 'root',
   :password => node['mysql']['server_root_password']
 }

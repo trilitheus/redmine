@@ -6,55 +6,34 @@
 #
 # All rights reserved - Do Not Redistribute
 #
-bash 'Create redmine user' do
-  not_if 'getent passwd redmine'
-  code <<-EOF
-groupadd redmine
-useradd -g redmine -d /srv/redmine -s /bin/bash -m redmine
-EOF
+
+# create user and group
+group node['redmine']['group']
+
+user node['redmine']['user'] do
+  gid node['redmine']['group']
+  shell '/bin/bash'
+  system true
+  supports manage_home: true
+  home node['redmine']['home']
 end
 
-%w{libmagic-dev libmagickwand-dev libmysqlclient-dev}.each do |pkg|
+# Install required packages
+node['redmine']['packages'].each do |pkg|
   package pkg do
     action :install
   end
 end
 
-%w{mysql::server mysql::ruby subversion git application ruby_build nginx}.each do |recipe|
+# include required cookbook recipes
+%w{subversion git application nginx}.each do |recipe|
   include_recipe recipe
 end
 
-### Create database and user
-# define mysql connection info
-mysql_connection_info = {
-  :host => 'localhost',
-  :username => 'root',
-  :password => node['mysql']['server_root_password']
-}
+# install ruby
+include_recipe 'redmine::ruby'
 
-# install local ruby
-include_recipe 'ruby_build'
-ruby_build_ruby '1.9.3-p362' do
-  prefix_path '/usr/local/'
-  environment 'CFLAGS' => '-g -O2'
-  action :install
-end
+# Set up database
+include_recipe 'redmine::database'
 
-gem_package 'bundler'
-
-# create database
-mysql_database 'redmine' do
-  connection mysql_connection_info
-  action :create
-end
-
-# create database user
-mysql_database_user 'redmine' do
-  connection mysql_connection_info
-  password 'redmine'
-  database_name 'redmine'
-  privileges [:all]
-  action [:create, :grant]
-end
-
-include_recipe 'redmine::application'
+include_recipe 'redmine::deploy'
