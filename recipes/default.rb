@@ -26,7 +26,7 @@ node['redmine']['packages'].each do |pkg|
 end
 
 # include required cookbook recipes
-%w{subversion git application nginx}.each do |recipe|
+%w{subversion git nginx}.each do |recipe|
   include_recipe recipe
 end
 
