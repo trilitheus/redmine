@@ -1,7 +1,7 @@
 <VirtualHost *:80>
    #ServerName <%= @params[:server_name] %>
    ServerName redmine
-   #ServerAlias <% @params[:server_aliases].each do |a| %><%= "#{a}" %> <% end %>
+   #ServerAlias <% @params[:server_aliases].each do |a| %><%= a %> <% end %>
    #DocumentRoot <%= @params[:docroot] %>
    DocumentRoot /srv/redmine/current/public
 
