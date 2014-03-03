@@ -12,16 +12,16 @@ mysql_connection_info = {
 }
 
 # create database
-mysql_database 'redmine' do
+mysql_database node['redmine']['dbname'] do
   connection mysql_connection_info
   action :create
 end
 
 # create database user
-mysql_database_user 'redmine' do
+mysql_database_user node['redmine']['user'] do
   connection mysql_connection_info
   password 'redmine'
-  database_name 'redmine'
+  database_name node['redmine']['dbname']
   privileges [:all]
   action [:create, :grant]
 end

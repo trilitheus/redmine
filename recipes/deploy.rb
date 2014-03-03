@@ -1,7 +1,53 @@
-# Create shared dir and add config and puma templates
-directory node['redmine']['home']  + '/shared' do
-  owner 'redmine'
-  group 'redmine'
+# Create shared dirs and configs
+%w{/app
+   /app/shared
+   /app/shared/config
+   /app/shared/log
+   /app/shared/pids
+   /app/shared/system
+   /app/shared/files
+  }.each do |dir|
+  directory node['redmine']['home']  + dir do
+    owner node['redmine']['user']
+    group node['redmine']['group']
+  end
+end
+
+# Create the database config
+template node['redmine']['home']  + '/app/shared/config/database.yml' do
+  owner node['redmine']['user']
+  group node['redmine']['group']
+  mode '640'
+  variables(
+    :database => node['redmine']['dbname'],
+    :dbuser => node['redmine']['user'],
+    :dbpass => node['redmine']['dbpass']
+  )
+  action :create
+end
+
+# Create the application config
+template node['redmine']['home'] + '/app/shared/config/configuration.yml' do
+  owner node['redmine']['user']
+  group node['redmine']['group']
+  mode '640'
+  variables(
+    :filesdir => node['redmine']['home'] + '/app/shared/files'
+  )
+  action :create
+end
+
+# Deploy the appliaction to the app dir
+deploy_revision node['redmine']['home'] + '/app' do
+  repo node['redmine']['url']
+  revision node['redmine']['revision']
+  user node['redmine']['user']
+  group node['redmine']['group']
+  environment 'RAILS_ENV' => node['redmine']['environment']
+  scm_provider Chef::Provider::Subversion
+  migrate true
+  action :force_deploy
+  symlink_before_migrate 'config/configuration.yml' => 'configuration.yml'
 end
 
 # Set up and deploy application

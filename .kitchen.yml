@@ -1,11 +1,18 @@
 ---
-driver:
-  name: vagrant
+driver_plugin: vagrant
+driver_config:
+  http_proxy: http://10.100.3.135:3128
+  https_proxy: http://10.100.3.135:3128
+  no_proxy: "localhost,127.0.0.1,*.ad.lancscc.net"
   customize:
     memory: 1024
 
 provisioner:
-  name: chef_solo
+  name: chef_zero
+  chef_client:
+    http_proxy: http://10.100.3.135:3128
+    https_proxy: http://10.100.3.135:3128
+    no_proxy: "localhost,127.0.0.1,*.ad.lancscc.net"
 
 platforms:
   - name: ubuntu-12.04
