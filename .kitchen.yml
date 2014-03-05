@@ -24,7 +24,7 @@ suites:
   - name: default
     driver_config:
       network:
-      - ['forwarded_port', {guest: 3000, host: 8300}]
+      - ['forwarded_port', {guest: 80, host: 8081}]
     run_list:
       - recipe[redmine::default]
     attributes:
