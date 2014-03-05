@@ -71,3 +71,6 @@ include_recipe 'redmine::database'
 
 # Deploy the redmine application
 include_recipe 'redmine::deploy'
+
+# Set up nginx
+include_recipe 'redmine::nginx'

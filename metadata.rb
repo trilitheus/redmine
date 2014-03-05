@@ -14,6 +14,9 @@ version          '0.1.0'
   ruby_build
   git
   nginx
+  build-essential
   }.each do |cb|
   depends cb
 end
+
+depends 'ohai', '~> 1.1.10'

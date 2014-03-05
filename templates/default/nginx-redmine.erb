@@ -1,13 +1,13 @@
 # This configuration file is managed by CHEF
 upstream redmine {
-  server unix://<%= node[:redmine][:homedir] %>/current/tmp/sockets/redmine.socket;
+  server unix://<%= @redmine_app_home %>/tmp/sockets/unicorn.sock;
 }
 
 server {
-  listen *:80 default_server;
-  server_name 33.33.33.10;
+  listen *:<%= @port %> default_server;
+  server_name <%= @ipaddress %>;
   server_tokens off;
-  root <%= node[:redmine][:homedir] %>/current/public;
+  root <%= @redmine_app_home %>/current/public;
 
   location / {
     try_files $uri $uri/index.html $uri.html @redmine;

@@ -1,0 +1,505 @@
+{
+  "total": 71,
+  "touched": 15,
+  "untouched": 56,
+  "coverage": 21.13,
+  "detailed": {
+    "execute[apt-get-update-build-essentials]": {
+      "source": {
+        "file": "/tmp/d20140305-22637-1kfezna/build-essential/recipes/debian.rb",
+        "line": 22
+      },
+      "touched": false
+    },
+    "package[autoconf]": {
+      "source": {
+        "file": "/tmp/d20140305-22637-1kfezna/build-essential/recipes/debian.rb",
+        "line": 40
+      },
+      "touched": false
+    },
+    "package[binutils-doc]": {
+      "source": {
+        "file": "/tmp/d20140305-22637-1kfezna/build-essential/recipes/debian.rb",
+        "line": 40
+      },
+      "touched": false
+    },
+    "package[bison]": {
+      "source": {
+        "file": "/tmp/d20140305-22637-1kfezna/build-essential/recipes/debian.rb",
+        "line": 40
+      },
+      "touched": false
+    },
+    "package[build-essential]": {
+      "source": {
+        "file": "/tmp/d20140305-22637-1kfezna/build-essential/recipes/debian.rb",
+        "line": 40
+      },
+      "touched": false
+    },
+    "package[flex]": {
+      "source": {
+        "file": "/tmp/d20140305-22637-1kfezna/build-essential/recipes/debian.rb",
+        "line": 40
+      },
+      "touched": false
+    },
+    "package[mysql-client]": {
+      "source": {
+        "file": "/tmp/d20140305-22637-1kfezna/mysql/recipes/client.rb",
+        "line": 46
+      },
+      "touched": false
+    },
+    "package[libmysqlclient-dev]": {
+      "source": {
+        "file": "/tmp/d20140305-22637-1kfezna/mysql/recipes/client.rb",
+        "line": 46
+      },
+      "touched": true
+    },
+    "chef_gem[mysql]": {
+      "source": {
+        "file": "/tmp/d20140305-22637-1kfezna/mysql/recipes/ruby.rb",
+        "line": 31
+      },
+      "touched": false
+    },
+    "directory[/var/cache/local/preseeding]": {
+      "source": {
+        "file": "/tmp/d20140305-22637-1kfezna/mysql/recipes/server.rb",
+        "line": 47
+      },
+      "touched": false
+    },
+    "execute[preseed mysql-server]": {
+      "source": {
+        "file": "/tmp/d20140305-22637-1kfezna/mysql/recipes/server.rb",
+        "line": 54
+      },
+      "touched": false
+    },
+    "template[/var/cache/local/preseeding/mysql-server.seed]": {
+      "source": {
+        "file": "/tmp/d20140305-22637-1kfezna/mysql/recipes/server.rb",
+        "line": 59
+      },
+      "touched": false
+    },
+    "template[/etc/mysql/debian.cnf]": {
+      "source": {
+        "file": "/tmp/d20140305-22637-1kfezna/mysql/recipes/server.rb",
+        "line": 67
+      },
+      "touched": false
+    },
+    "package[mysql-server]": {
+      "source": {
+        "file": "/tmp/d20140305-22637-1kfezna/mysql/recipes/server.rb",
+        "line": 94
+      },
+      "touched": false
+    },
+    "directory[/var/run/mysqld]": {
+      "source": {
+        "file": "/tmp/d20140305-22637-1kfezna/mysql/recipes/server.rb",
+        "line": 108
+      },
+      "touched": false
+    },
+    "directory[/var/log/mysql]": {
+      "source": {
+        "file": "/tmp/d20140305-22637-1kfezna/mysql/recipes/server.rb",
+        "line": 108
+      },
+      "touched": false
+    },
+    "directory[/etc/mysql]": {
+      "source": {
+        "file": "/tmp/d20140305-22637-1kfezna/mysql/recipes/server.rb",
+        "line": 108
+      },
+      "touched": false
+    },
+    "directory[/etc/mysql/conf.d]": {
+      "source": {
+        "file": "/tmp/d20140305-22637-1kfezna/mysql/recipes/server.rb",
+        "line": 108
+      },
+      "touched": false
+    },
+    "directory[/var/lib/mysql]": {
+      "source": {
+        "file": "/tmp/d20140305-22637-1kfezna/mysql/recipes/server.rb",
+        "line": 108
+      },
+      "touched": false
+    },
+    "execute[mysql-install-db]": {
+      "source": {
+        "file": "/tmp/d20140305-22637-1kfezna/mysql/recipes/server.rb",
+        "line": 148
+      },
+      "touched": false
+    },
+    "service[mysql]": {
+      "source": {
+        "file": "/tmp/d20140305-22637-1kfezna/mysql/recipes/server.rb",
+        "line": 154
+      },
+      "touched": false
+    },
+    "execute[assign-root-password]": {
+      "source": {
+        "file": "/tmp/d20140305-22637-1kfezna/mysql/recipes/server.rb",
+        "line": 166
+      },
+      "touched": false
+    },
+    "template[/etc/mysql/grants.sql]": {
+      "source": {
+        "file": "/tmp/d20140305-22637-1kfezna/mysql/recipes/server.rb",
+        "line": 179
+      },
+      "touched": false
+    },
+    "execute[mysql-install-privileges]": {
+      "source": {
+        "file": "/tmp/d20140305-22637-1kfezna/mysql/recipes/server.rb",
+        "line": 195
+      },
+      "touched": false
+    },
+    "template[/etc/mysql/my.cnf]": {
+      "source": {
+        "file": "/tmp/d20140305-22637-1kfezna/mysql/recipes/server.rb",
+        "line": 202
+      },
+      "touched": false
+    },
+    "gem_package[mysql]": {
+      "source": {
+        "file": "/tmp/d20140305-22637-1kfezna/redmine/recipes/database.rb",
+        "line": 6
+      },
+      "touched": true
+    },
+    "mysql_database[redmine]": {
+      "source": {
+        "file": "/tmp/d20140305-22637-1kfezna/redmine/recipes/database.rb",
+        "line": 15
+      },
+      "touched": false
+    },
+    "mysql_database_user[redmine]": {
+      "source": {
+        "file": "/tmp/d20140305-22637-1kfezna/redmine/recipes/database.rb",
+        "line": 21
+      },
+      "touched": false
+    },
+    "remote_directory[/etc/chef/ohai_plugins]": {
+      "source": {
+        "file": "/tmp/d20140305-22637-1kfezna/ohai/recipes/default.rb",
+        "line": 33
+      },
+      "touched": false
+    },
+    "ohai[custom_plugins]": {
+      "source": {
+        "file": "/tmp/d20140305-22637-1kfezna/ohai/recipes/default.rb",
+        "line": 46
+      },
+      "touched": false
+    },
+    "group[redmine]": {
+      "source": {
+        "file": "/tmp/d20140305-22637-1kfezna/redmine/recipes/default.rb",
+        "line": 30
+      },
+      "touched": true
+    },
+    "user[redmine]": {
+      "source": {
+        "file": "/tmp/d20140305-22637-1kfezna/redmine/recipes/default.rb",
+        "line": 32
+      },
+      "touched": true
+    },
+    "package[libmagic-dev]": {
+      "source": {
+        "file": "/tmp/d20140305-22637-1kfezna/redmine/recipes/default.rb",
+        "line": 42
+      },
+      "touched": true
+    },
+    "package[libmagickwand-dev]": {
+      "source": {
+        "file": "/tmp/d20140305-22637-1kfezna/redmine/recipes/default.rb",
+        "line": 42
+      },
+      "touched": true
+    },
+    "package[subversion]": {
+      "source": {
+        "file": "/tmp/d20140305-22637-1kfezna/subversion/recipes/client.rb",
+        "line": 35
+      },
+      "touched": false
+    },
+    "package[subversion-tools]": {
+      "source": {
+        "file": "/tmp/d20140305-22637-1kfezna/subversion/recipes/client.rb",
+        "line": 53
+      },
+      "touched": false
+    },
+    "package[libsvn-perl]": {
+      "source": {
+        "file": "/tmp/d20140305-22637-1kfezna/subversion/recipes/client.rb",
+        "line": 53
+      },
+      "touched": false
+    },
+    "package[git]": {
+      "source": {
+        "file": "/tmp/d20140305-22637-1kfezna/git/recipes/default.rb",
+        "line": 24
+      },
+      "touched": false
+    },
+    "ohai[reload_nginx]": {
+      "source": {
+        "file": "/tmp/d20140305-22637-1kfezna/nginx/recipes/ohai_plugin.rb",
+        "line": 22
+      },
+      "touched": false
+    },
+    "template[/etc/chef/ohai_plugins/nginx.rb]": {
+      "source": {
+        "file": "/tmp/d20140305-22637-1kfezna/nginx/recipes/ohai_plugin.rb",
+        "line": 27
+      },
+      "touched": false
+    },
+    "package[nginx]": {
+      "source": {
+        "file": "/tmp/d20140305-22637-1kfezna/nginx/recipes/default.rb",
+        "line": 31
+      },
+      "touched": false
+    },
+    "service[nginx]": {
+      "source": {
+        "file": "/tmp/d20140305-22637-1kfezna/nginx/recipes/default.rb",
+        "line": 32
+      },
+      "touched": false
+    },
+    "directory[/etc/nginx]": {
+      "source": {
+        "file": "/tmp/d20140305-22637-1kfezna/nginx/recipes/commons_dir.rb",
+        "line": 21
+      },
+      "touched": false
+    },
+    "directory[/var/log/nginx]": {
+      "source": {
+        "file": "/tmp/d20140305-22637-1kfezna/nginx/recipes/commons_dir.rb",
+        "line": 28
+      },
+      "touched": false
+    },
+    "directory[/etc/nginx/sites-available]": {
+      "source": {
+        "file": "/tmp/d20140305-22637-1kfezna/nginx/recipes/commons_dir.rb",
+        "line": 36
+      },
+      "touched": false
+    },
+    "directory[/etc/nginx/sites-enabled]": {
+      "source": {
+        "file": "/tmp/d20140305-22637-1kfezna/nginx/recipes/commons_dir.rb",
+        "line": 36
+      },
+      "touched": false
+    },
+    "directory[/etc/nginx/conf.d]": {
+      "source": {
+        "file": "/tmp/d20140305-22637-1kfezna/nginx/recipes/commons_dir.rb",
+        "line": 36
+      },
+      "touched": false
+    },
+    "template[/usr/sbin/nxensite]": {
+      "source": {
+        "file": "/tmp/d20140305-22637-1kfezna/nginx/recipes/commons_script.rb",
+        "line": 22
+      },
+      "touched": false
+    },
+    "template[/usr/sbin/nxdissite]": {
+      "source": {
+        "file": "/tmp/d20140305-22637-1kfezna/nginx/recipes/commons_script.rb",
+        "line": 22
+      },
+      "touched": false
+    },
+    "template[nginx.conf]": {
+      "source": {
+        "file": "/tmp/d20140305-22637-1kfezna/nginx/recipes/commons_conf.rb",
+        "line": 21
+      },
+      "touched": false
+    },
+    "template[/etc/nginx/sites-available/default]": {
+      "source": {
+        "file": "/tmp/d20140305-22637-1kfezna/nginx/recipes/commons_conf.rb",
+        "line": 30
+      },
+      "touched": false
+    },
+    "execute[nxdissite default]": {
+      "source": {
+        "file": "/tmp/d20140305-22637-1kfezna/nginx/definitions/nginx_site.rb",
+        "line": 29
+      },
+      "touched": false
+    },
+    "template[/etc/subversion/servers]": {
+      "source": {
+        "file": "/tmp/d20140305-22637-1kfezna/redmine/recipes/default.rb",
+        "line": 54
+      },
+      "touched": false
+    },
+    "execute[Install ruby-build]": {
+      "source": {
+        "file": "/tmp/d20140305-22637-1kfezna/ruby_build/recipes/default.rb",
+        "line": 44
+      },
+      "touched": false
+    },
+    "directory[/var/chef/cache]": {
+      "source": {
+        "file": "/tmp/d20140305-22637-1kfezna/ruby_build/recipes/default.rb",
+        "line": 54
+      },
+      "touched": false
+    },
+    "git[/var/chef/cache/ruby-build]": {
+      "source": {
+        "file": "/tmp/d20140305-22637-1kfezna/ruby_build/recipes/default.rb",
+        "line": 58
+      },
+      "touched": false
+    },
+    "ruby_build_ruby[1.9.3-p362]": {
+      "source": {
+        "file": "/tmp/d20140305-22637-1kfezna/redmine/recipes/ruby.rb",
+        "line": 7
+      },
+      "touched": false
+    },
+    "gem_package[bundler]": {
+      "source": {
+        "file": "/tmp/d20140305-22637-1kfezna/redmine/recipes/ruby.rb",
+        "line": 14
+      },
+      "touched": true
+    },
+    "directory[/srv/redmine/shared]": {
+      "source": {
+        "file": "/tmp/d20140305-22637-1kfezna/redmine/recipes/deploy.rb",
+        "line": 11
+      },
+      "touched": true
+    },
+    "directory[/srv/redmine/shared/config]": {
+      "source": {
+        "file": "/tmp/d20140305-22637-1kfezna/redmine/recipes/deploy.rb",
+        "line": 11
+      },
+      "touched": true
+    },
+    "directory[/srv/redmine/shared/log]": {
+      "source": {
+        "file": "/tmp/d20140305-22637-1kfezna/redmine/recipes/deploy.rb",
+        "line": 11
+      },
+      "touched": true
+    },
+    "directory[/srv/redmine/shared/pids]": {
+      "source": {
+        "file": "/tmp/d20140305-22637-1kfezna/redmine/recipes/deploy.rb",
+        "line": 11
+      },
+      "touched": true
+    },
+    "directory[/srv/redmine/shared/sockets]": {
+      "source": {
+        "file": "/tmp/d20140305-22637-1kfezna/redmine/recipes/deploy.rb",
+        "line": 11
+      },
+      "touched": false
+    },
+    "directory[/srv/redmine/shared/system]": {
+      "source": {
+        "file": "/tmp/d20140305-22637-1kfezna/redmine/recipes/deploy.rb",
+        "line": 11
+      },
+      "touched": true
+    },
+    "directory[/srv/redmine/shared/files]": {
+      "source": {
+        "file": "/tmp/d20140305-22637-1kfezna/redmine/recipes/deploy.rb",
+        "line": 11
+      },
+      "touched": true
+    },
+    "directory[/srv/redmine/shared/vendor]": {
+      "source": {
+        "file": "/tmp/d20140305-22637-1kfezna/redmine/recipes/deploy.rb",
+        "line": 11
+      },
+      "touched": true
+    },
+    "template[/srv/redmine/shared/config/database.yml]": {
+      "source": {
+        "file": "/tmp/d20140305-22637-1kfezna/redmine/recipes/deploy.rb",
+        "line": 18
+      },
+      "touched": false
+    },
+    "template[/srv/redmine/shared/config/configuration.yml]": {
+      "source": {
+        "file": "/tmp/d20140305-22637-1kfezna/redmine/recipes/deploy.rb",
+        "line": 31
+      },
+      "touched": false
+    },
+    "template[/srv/redmine/shared/config/unicorn.rb]": {
+      "source": {
+        "file": "/tmp/d20140305-22637-1kfezna/redmine/recipes/deploy.rb",
+        "line": 41
+      },
+      "touched": false
+    },
+    "deploy_revision[/srv/redmine]": {
+      "source": {
+        "file": "/tmp/d20140305-22637-1kfezna/redmine/recipes/deploy.rb",
+        "line": 52
+      },
+      "touched": false
+    },
+    "package[ruby1.9.3]": {
+      "source": {
+        "file": "/tmp/d20140305-22637-1kfezna/redmine/recipes/ruby.rb",
+        "line": 3
+      },
+      "touched": true
+    }
+  }
+}

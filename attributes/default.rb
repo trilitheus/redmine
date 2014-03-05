@@ -21,6 +21,3 @@ end
 
 override['nginx']['default_site_enabled'] = false
 override['nginx']['client_max_body_size'] = '50m'
-
-override['postgresql']['config_pgtune']['db_type'] = 'web'
-override['postgresql']['enable_pgdg_apt'] = true
