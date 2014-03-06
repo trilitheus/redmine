@@ -28,8 +28,8 @@ def load_current_resource
   @current_resource.name(new_resource.name)
   @current_resource.source(new_resource.source)
   @current_resource.source_type(new_resource.source_type) || 'git'
-  @current_resource.run_bundler(new_resource.source_type) || false
-  @current_resource.restart_redmine(new_resource.source_type) || false
+  @current_resource.run_bundler(new_resource.run_bundler) || false
+  @current_resource.restart_redmine(new_resource.restart_redmine) || false
 
   if plugin_exists?(@current_resource.name)
     # TODO; populate @current_resource from existing plugin_dir
@@ -52,6 +52,9 @@ def install_redmine_plugin
       user node['redmine']['user']
       group node['redmine']['group']
       action :checkout
+      notifies :run, 'execute[run_bundler]', :immediately if plugin_run_bundler
+      notifies :run, 'execute[plugin_migrate]', :delayed
+      notifies :restart, 'service[redmine]', :delayed if plugin_restart_redmine
     end
     execute 'plugin_migrate' do
       environment 'RAILS_ENV' => node['redmine']['environment']
@@ -59,8 +62,7 @@ def install_redmine_plugin
       group node['redmine']['group']
       cwd node['redmine']['home'] + '/current'
       command 'bundle exec rake redmine:plugins:migrate'
-      notifies :run, 'execute[run_bundler]', :immediately if plugin_run_bundler
-      notifies :restart, 'service[redmine]', :delayed if plugin_restart_redmine
+      action :nothing
     end
     execute 'run_bundler' do
       environment 'RAILS_ENV' => node['redmine']['environment']
@@ -77,5 +79,5 @@ end
 
 def plugin_exists?(name)
   Chef::Log.debug "Checking if redmine plugin #{name} exists..."
-  File.directory?(node['redmine']['home'] + '/shared/plugins/' + name)
+  ::File.directory?(node['redmine']['home'] + '/shared/plugins/' + name)
 end
