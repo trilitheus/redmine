@@ -27,5 +27,31 @@ def load_current_resource
   @current_resource = Chef::Resource::RedminePlugin.new(@new_resource.name)
   @current_resource.name(@new_resource.name)
   @current_resource.source(@new_resource.source)
-  @current_resource.source_type(@new_resource.source_type)
+  @current_resource.source_type(@new_resource.source_type) || 'git'
+  @current_resource.run_bundler(@new_resource.source_type) || false
+  @current_resource.restart_redmine(@new_resource.source_type) || false
+
+  if plugin_exists?(@current_resource.name)
+    # TODO; populate @current_resource from existing plugin_dir
+    @current_resource.exists = true
+  end
+end
+
+def install_redmine_plugin
+  @plugin_name = new_resource.name
+  @plugin_source = new_resource.source
+  @plugin_source_type = new_resource.source_type
+
+  # We only support git as a plugin source for now
+  case plugin_source_type
+  when 'git'
+    git node['redmine']['home'] + '/shared/vendor/plugins/' + @plugin_name do
+      repository @plugin_source
+      user node['redmine']['user']
+      user node['redmine']['group']
+      action :checkout
+    end
+  else
+    Chef::Log.warn "#{plugin_source_type} not supported."
+  end
 end
