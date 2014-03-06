@@ -5,9 +5,9 @@ end
 
 action :install do
   if @current_resource.exists
-    Chef::Log.info "#{ @new_resource } already exists - nothing to do."
+    Chef::Log.info "#{ new_resource } already exists - nothing to do."
   else
-    converge_by("Install #{ @new_resource }") do
+    converge_by("Install #{ new_resource }") do
       install_redmine_plugin
     end
   end
@@ -15,7 +15,7 @@ end
 
 action :remove do
   if @current_resource.exists
-    converge_by("Remove #{ @new_resource }") do
+    converge_by("Remove #{ new_resource }") do
       remove_redmine_plugin
     end
   else
@@ -24,12 +24,12 @@ action :remove do
 end
 
 def load_current_resource
-  @current_resource = Chef::Resource::RedminePlugin.new(@new_resource.name)
-  @current_resource.name(@new_resource.name)
-  @current_resource.source(@new_resource.source)
-  @current_resource.source_type(@new_resource.source_type) || 'git'
-  @current_resource.run_bundler(@new_resource.source_type) || false
-  @current_resource.restart_redmine(@new_resource.source_type) || false
+  @current_resource = Chef::Resource::RedminePlugin.new(new_resource.name)
+  @current_resource.name(new_resource.name)
+  @current_resource.source(new_resource.source)
+  @current_resource.source_type(new_resource.source_type) || 'git'
+  @current_resource.run_bundler(new_resource.source_type) || false
+  @current_resource.restart_redmine(new_resource.source_type) || false
 
   if plugin_exists?(@current_resource.name)
     # TODO; populate @current_resource from existing plugin_dir
@@ -73,4 +73,9 @@ def install_redmine_plugin
   else
     Chef::Log.warn "#{plugin_source_type} not supported."
   end
+end
+
+def plugin_exists?(name)
+  Chef::Log.debug "Checking if redmine plugin #{name} exists..."
+  File.directory?(node['redmine']['home'] + '/shared/plugins/' + name)
 end
