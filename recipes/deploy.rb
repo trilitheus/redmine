@@ -7,6 +7,7 @@
    /shared/system
    /shared/files
    /shared/vendor
+   /shared/plugins
    /shared/script
   }.each do |dir|
   directory node['redmine']['home'] + dir do
@@ -94,12 +95,14 @@ deploy_revision node['redmine']['home'] do
     end
   end
 
-  action :deploy
+  action :force_deploy
+  purge_before_symlink %w{plugins tmp/sockets tmp/pids log}
   symlink_before_migrate 'config/configuration.yml' => 'config/configuration.yml',
                          'config/database.yml' => 'config/database.yml',
                          'config/unicorn.rb' => 'config/unicorn.rb',
                          'script/web' => 'script/web',
-                         'vendor/ruby' => 'vendor/ruby'
+                         'vendor/ruby' => 'vendor/ruby',
+                         'plugins' => 'plugins'
 
   symlinks 'system' => 'public/system',
            'pids' => 'tmp/pids',

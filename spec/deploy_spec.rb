@@ -16,8 +16,11 @@ describe 'redmine::deploy' do
      shared/log
      shared/pids
      shared/system
+     shared/sockets
      shared/files
      shared/vendor
+     shared/vendor
+     shared/plugins
      shared/script
     }.each do |dir|
     it "should create redmine's shared directory #{dir}" do
