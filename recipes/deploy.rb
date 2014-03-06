@@ -78,13 +78,11 @@ deploy_revision node['redmine']['home'] do
   end
 
   before_migrate do
-    if node['redmine']['environment'] == 'production'
-      cookbook_file release_path + '/Gemfile.local' do
-        user node['redmine']['user']
-        group node['redmine']['group']
-        mode '640'
-        action :create
-      end
+    cookbook_file release_path + '/Gemfile.local' do
+      user node['redmine']['user']
+      group node['redmine']['group']
+      mode '640'
+      action :create
     end
 
     execute 'bundle_install' do

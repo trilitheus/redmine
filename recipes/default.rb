@@ -10,10 +10,10 @@
 # Needs setting or won't work if using chef-zero or in a bootstrap runlist when behind a proxy
 # But problem in vagrant env as Chef::Config[:http_proxy] is not set correctly
 # So work around to set manually
-svn_prx_host = '10.100.3.135'
-svn_prx_port = '3128'
-svn_ssl_prx_host = '10.100.3.135'
-svn_ssl_prx_port = '3218'
+# svn_prx_host = '10.100.3.135'
+# svn_prx_port = '3128'
+# svn_ssl_prx_host = '10.100.3.135'
+# svn_ssl_prx_port = '3218'
 # unless Chef::Config[:http_proxy].nil?
 #   ENV['http_proxy'] = URI.parse(Chef::Config[:http_proxy]).to_s
 #   svn_prx_host = URI.parse(Chef::Config[:http_proxy]).host
@@ -51,16 +51,16 @@ end
 
 # Set up subversion proxy details
 # unless Chef::Config[:http_proxy].nil?
-  template '/etc/subversion/servers' do
-    owner 'root'
-    group 'root'
-    variables(
-      svn_prx_host: svn_prx_host,
-      svn_prx_port: svn_prx_port,
-      svn_ssl_prx_host: svn_ssl_prx_host,
-      svn_ssl_prx_port: svn_ssl_prx_port
-    )
-  end
+#  template '/etc/subversion/servers' do
+#    owner 'root'
+#    group 'root'
+#    variables(
+#      svn_prx_host: svn_prx_host,
+#      svn_prx_port: svn_prx_port,
+#      svn_ssl_prx_host: svn_ssl_prx_host,
+#      svn_ssl_prx_port: svn_ssl_prx_port
+#    )
+#  end
 # end
 
 # install ruby
