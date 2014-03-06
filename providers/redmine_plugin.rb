@@ -38,18 +38,37 @@ def load_current_resource
 end
 
 def install_redmine_plugin
-  @plugin_name = new_resource.name
-  @plugin_source = new_resource.source
-  @plugin_source_type = new_resource.source_type
+  plugin_name = new_resource.name
+  plugin_source = new_resource.source
+  plugin_source_type = new_resource.source_type
+  plugin_run_bundler = new_resource.run_bundler
+  plugin_restart_redmine = new_resource.restart_redmine
 
   # We only support git as a plugin source for now
   case plugin_source_type
   when 'git'
-    git node['redmine']['home'] + '/shared/vendor/plugins/' + @plugin_name do
-      repository @plugin_source
+    git node['redmine']['home'] + '/shared/plugins/' + plugin_name do
+      repository plugin_source
       user node['redmine']['user']
-      user node['redmine']['group']
+      group node['redmine']['group']
       action :checkout
+    end
+    execute 'plugin_migrate' do
+      environment 'RAILS_ENV' => node['redmine']['environment']
+      user node['redmine']['user']
+      group node['redmine']['group']
+      cwd node['redmine']['home'] + '/current'
+      command 'bundle exec rake redmine:plugins:migrate'
+      notifies :run, 'execute[run_bundler]', :immediately if plugin_run_bundler
+      notifies :restart, 'service[redmine]', :delayed if plugin_restart_redmine
+    end
+    execute 'run_bundler' do
+      environment 'RAILS_ENV' => node['redmine']['environment']
+      user node['redmine']['user']
+      group node['redmine']['group']
+      cwd node['redmine']['home'] + '/current'
+      action :nothing
+      command 'bundle install'
     end
   else
     Chef::Log.warn "#{plugin_source_type} not supported."
