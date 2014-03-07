@@ -51,7 +51,4 @@ describe 'redmine::default' do
     end
   end
 
-  it 'should render the /etc/subversion/servers file' do
-    expect(chef_run).to render_file('/etc/subversion/servers')
-  end
 end
