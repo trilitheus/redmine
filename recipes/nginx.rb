@@ -7,7 +7,7 @@ template '/etc/nginx/sites-available/redmine' do
   notifies :restart, 'service[nginx]'
   variables(
     :redmine_app_home => node['redmine']['home'] + '/current',
-    :ipaddress => node['ipaddress'],
+    :server_name => node['redmine']['nginx_server_names'].join(' '),
     :port => '80'
   )
 end

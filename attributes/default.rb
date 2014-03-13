@@ -5,6 +5,7 @@ default['redmine']['home'] = '/srv/redmine'
 default['redmine']['dbname'] = 'redmine'
 default['redmine']['dbuser'] = 'redmine'
 default['redmine']['dbpass'] = 'redmine'
+default['redmine']['nginx_server_names'] = ['redmine.*']
 
 default['redmine']['version'] = '2.5-stable'
 default['redmine']['url'] = 'http://svn.redmine.org/redmine/branches/' + node['redmine']['version']

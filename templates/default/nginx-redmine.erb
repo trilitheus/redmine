@@ -1,11 +1,20 @@
 # This configuration file is managed by CHEF
 upstream redmine {
-  server unix://<%= @redmine_app_home %>/tmp/sockets/unicorn.sock;
+  # fail_timeout=0 means we always retry an upstream even if it failed
+  # to return a good HTTP response (in case the Unicorn master nukes a
+  # single worker for timing out).
+
+  # for UNIX domain socket setups:
+  server unix://<%= @redmine_app_home %>/tmp/sockets/unicorn.sock fail_timeout=0;
+
+  # for TCP setups, point these to your backend servers
+  # server 192.168.0.7:8080 fail_timeout=0;
+  # server 192.168.0.8:8080 fail_timeout=0;
 }
 
 server {
   listen *:<%= @port %> default_server;
-  server_name <%= @ipaddress %>;
+  server_name <%= @server_name %>;
   server_tokens off;
   root <%= @redmine_app_home %>/current/public;
 
