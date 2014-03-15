@@ -10,6 +10,7 @@ default['redmine']['nginx_server_names'] = ['redmine.*']
 default['redmine']['version'] = '2.5-stable'
 default['redmine']['url'] = 'http://svn.redmine.org/redmine/branches/' + node['redmine']['version']
 default['redmine']['revision'] = '12954'
+
 default['redmine']['environment'] = 'production'
 
 default['redmine']['packages'] = %w{libmagic-dev libmagickwand-dev libmysqlclient-dev}
