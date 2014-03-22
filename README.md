@@ -3,12 +3,26 @@ redmine/ cookbook
 
 [![Build Status](https://travis-ci.org/trilitheus/redmine.png?branch=master)](https://travis-ci.org/trilitheus/redmine)
 
+This Cookbook installs and  configures redmine with nginx and unicorn.
 
 Requirements
 ============
 
+Other cookbooks required and stated in the metadata are:
+*  apt
+* mysql
+* database
+* subversion
+* ruby_build
+* git
+* nginx
+* build-essential
+* ohai
+
 Usage
 =====
+
+Add this cookbook to your node's run list.
 
 Attributes
 ==========
@@ -73,4 +87,4 @@ Recipes
 
 Author
 ======
-Author:: trilitheus (trilitheus@gmail.com)
+Author: trilitheus (trilitheus@gmail.com)
