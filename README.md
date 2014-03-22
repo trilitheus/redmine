@@ -37,16 +37,16 @@ Attributes
   - Possible to set from chef_vault
 
 * `node['redmine']['web_fqdn']`
-  - The main server name - defaults to redmine.node['domain']
+  - The main server name - defaults to `redmine.node['domain']`
 
 * `node['redmine']['nginx_server_names']`
   - Server aliases, defaults to `[ 'gitlab.* ]`
 
 * `node['redmine']['version']`
-  - unused?
+  - SVN Version, default to `2.5-stable`
 
 * `node['redmine']['url']`
-  - SVN repo address
+  - SVN repo address, default to `http://svn.redmine.org/redmine/branches/ + node['redmine']['version']`
 
 * `node['redmine']['revision']`
   - Redmine SVN Repo revision
