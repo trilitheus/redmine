@@ -13,48 +13,48 @@ Usage
 Attributes
 ==========
 
-* node['redmine']['user']
-* node['redmine']['group']
+* `node['redmine']['user']`
+* `node['redmine']['group']`
   - Redmine service user and group for Unicorn Rails app, default 'redine'
   
-* node['redmine']['home']
+* `node['redmine']['home']`
   - Redmine top-level home for service account, default '/srv/redmine'
 
 This cookbook currently only supports mysql database
-* node['redmine']['type']
+* `node['redmine']['type']`
   - The database type to use.
   - Options: 'mysql', 'postgresql'
   - Default 'mysql
 
-* node['redmine']['dbname']
+* `node['redmine']['dbname']`
   - The name for the database, default 'redmine'
 
-* node['redmine']['dbuser']
+* `node['redmine']['dbuser']`
   - The user for the database, default 'redmine'
 
-* node['redmine']['dbpass']
+* `node['redmine']['dbpass']`
   - The password for the database, default 'redmine'
   - Possible to set from chef_vault
 
-* node['redmine']['web_fqdn']
-  - The main server name - defaults to redmine + node['domain']
+* `node['redmine']['web_fqdn']`
+  - The main server name - defaults to redmine + `node['domain']
 
-* node['redmine']['nginx_server_names']
+* `node['redmine']['nginx_server_names']`
   - Server aliases, defaults to [ 'gitlab.* ]
 
-* node['redmine']['version']
+* `node['redmine']['version']`
   - unused?
 
-* node['redmine']['url']
+* `node['redmine']['url']`
   - SVN repo address
 
-* node['redmine']['revision']
+* `node['redmine']['revision']`
   - Redmine SVN Repo revision
 
-* node['redmine']['environment']
+* `node['redmine']['environment']`
   - The rails environment, default to 'production'
 
-* node['redmine']['packages']
+* `node['redmine']['packages']`
   - prerequisite packages to install for redmine
   - defaults to %w{libmagic-dev libmagickwand-dev libmysqlclient-dev}
 
