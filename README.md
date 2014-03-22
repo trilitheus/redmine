@@ -4,6 +4,7 @@ redmine/ cookbook
 [![Build Status](https://travis-ci.org/trilitheus/redmine.png?branch=master)](https://travis-ci.org/trilitheus/redmine)
 
 This Cookbook installs and  configures redmine with nginx and unicorn.
+An LWRP is also provided to allow easy install of redmine plugins
 
 Requirements
 ============
@@ -23,6 +24,17 @@ Usage
 =====
 
 Add this cookbook to your node's run list.
+
+To install a redmine plugin, the redmine_plugin resource is provided.
+At present only plugins with a git source are supported.
+
+Call this in your recipe as follows:
+    redmine_plugins 'a_plugin_name' do
+      source 'http://gitrepo'
+      source_type 'git'
+      restart_bundler boolean
+      restart_redmine boolean
+    end
 
 Attributes
 ==========
@@ -54,7 +66,7 @@ Attributes
   - The main server name - defaults to `redmine.node['domain']`
 
 * `node['redmine']['nginx_server_names']`
-  - Server aliases, defaults to `[ 'gitlab.* ]`
+  - Server aliases, defaults to `[ 'redmine.* ]`
 
 * `node['redmine']['version']`
   - SVN Version, default to `2.5-stable`
