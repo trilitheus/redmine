@@ -1,4 +1,4 @@
-Redmine cokbook
+Redmine Cookbook
 =================
 
 [![Build Status](https://travis-ci.org/trilitheus/redmine.png?branch=master)](https://travis-ci.org/trilitheus/redmine)
