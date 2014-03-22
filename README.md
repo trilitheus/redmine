@@ -1,15 +1,76 @@
-# redmine/ cookbook
+redmine/ cookbook
+=================
+
 [![Build Status](https://travis-ci.org/trilitheus/redmine.png?branch=master)](https://travis-ci.org/trilitheus/redmine)
 
 
-# Requirements
+Requirements
+============
 
-# Usage
+Usage
+=====
 
-# Attributes
+Attributes
+==========
 
-# Recipes
+* node['redmine']['user']
+* node['redmine']['group']
+  - Redmine service user and group for Unicorn Rails app, default 'redine'
+  
+* node['redmine']['home']
+  - Redmine top-level home for service account, default '/srv/redmine'
 
-# Author
+# Cookbook Currently only supports mysql database
+* node['redmine']['type']
+  - The database type to use.
+  - Options: 'mysql', 'postgresql'
+  - Default 'mysql
 
-Author:: YOUR_NAME (<YOUR_EMAIL>)
+* node['redmine']['dbname']
+  - The name for the database, default 'redmine'
+
+* node['redmine']['dbuser']
+  - The user for the database, default 'redmine'
+
+* node['redmine']['dbpass']
+  - The password for the database, default 'redmine'
+  - Possible to set from chef_vault
+
+* node['redmine']['web_fqdn']
+  - The main server name - defaults to redmine + node['domain']
+
+* node['redmine']['nginx_server_names']
+  - Server aliases, defaults to [ 'gitlab.* ]
+
+* node['redmine']['version']
+  - unused?
+
+* node['redmine']['url']
+  - SVN repo address
+
+* node['redmine']['revision']
+  - Redmine SVN Repo revision
+
+* node['redmine']['environment']
+  - The rails environment, default to 'production'
+
+* node['redmine']['packages']
+  - prerequisite packages to install for redmine
+  - defaults to %w{libmagic-dev libmagickwand-dev libmysqlclient-dev}
+
+Recipes
+=======
+
+* default
+
+* ruby
+
+* database
+
+* deploy
+
+* nginx
+
+Author
+======
+Author:: trilitheus (trilitheus@gmail.com)
