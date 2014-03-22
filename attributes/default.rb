@@ -20,6 +20,3 @@ if node['platform'] == 'ubuntu' && node['platform_version'].to_f == 12.04
 else
   default['redmine']['ruby_install'] = 'build'
 end
-
-override['nginx']['default_site_enabled'] = false
-override['nginx']['client_max_body_size'] = '50m'
