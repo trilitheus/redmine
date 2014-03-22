@@ -20,7 +20,7 @@ Attributes
 * node['redmine']['home']
   - Redmine top-level home for service account, default '/srv/redmine'
 
-# Cookbook Currently only supports mysql database
+This cookbook currently only supports mysql database
 * node['redmine']['type']
   - The database type to use.
   - Options: 'mysql', 'postgresql'
