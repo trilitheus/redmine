@@ -56,7 +56,7 @@ Attributes
 
 * `node['redmine']['packages']`
   - prerequisite packages to install for redmine
-  - defaults to %w{libmagic-dev libmagickwand-dev libmysqlclient-dev}
+  - defaults to `%w{libmagic-dev libmagickwand-dev libmysqlclient-dev}`
 
 Recipes
 =======
