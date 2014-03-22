@@ -1,9 +1,9 @@
-redmine/ cookbook
+Redmine cokbook
 =================
 
 [![Build Status](https://travis-ci.org/trilitheus/redmine.png?branch=master)](https://travis-ci.org/trilitheus/redmine)
 
-This Cookbook installs and  configures redmine with nginx and unicorn.
+This Cookbook installs and  configures redmine with nginx and unicorn.  
 An LWRP is also provided to allow easy install of redmine plugins
 
 Requirements
