@@ -29,12 +29,13 @@ To install a redmine plugin, the redmine_plugin resource is provided.
 At present only plugins with a git source are supported.
 
 Call this in your recipe as follows:
-    redmine_plugins 'a_plugin_name' do
-      source 'http://gitrepo'
-      source_type 'git'
-      restart_bundler boolean
-      restart_redmine boolean
-    end
+
+    redmine_plugins 'a_plugin_name' do  
+      source 'http://gitrepo'  
+      source_type 'git'  
+      restart_bundler boolean  
+      restart_redmine boolean  
+    end  
 
 Attributes
 ==========
