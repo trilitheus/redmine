@@ -23,29 +23,29 @@ describe 'redmine::default' do
     expect(chef_run).to create_user('redmine')
   end
 
-  %w{libmagic-dev
+  %w(libmagic-dev
      libmagickwand-dev
      libmysqlclient-dev
-    }.each do |pkg|
+).each do |pkg|
     it "should install #{pkg}" do
       expect(chef_run).to install_package(pkg)
     end
   end
 
-  %w{redmine::ruby
+  %w(redmine::ruby
      redmine::database
      redmine::deploy
      redmine::nginx
-    }.each do |rec|
+).each do |rec|
     it "should include the #{rec} recipe" do
       expect(chef_run).to include_recipe(rec)
     end
   end
 
-  %w{subversion
+  %w(subversion
      git
      nginx
-    }.each do |ckbk|
+).each do |ckbk|
     it "should include the #{ckbk} cookbook" do
       expect(chef_run).to include_recipe(ckbk)
     end

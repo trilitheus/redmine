@@ -16,7 +16,7 @@ describe 'redmine::database' do
   end
 
   it 'should include the mysql::server and mysql::ruby recipes' do
-    %w{mysql::server mysql::ruby}.each do |rec|
+    %w(mysql::server mysql::ruby).each do |rec|
       expect(chef_run).to include_recipe(rec)
     end
   end

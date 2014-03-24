@@ -1,5 +1,5 @@
 # Create database and user
-%w{mysql::server mysql::ruby}.each do |recipe|
+%w(mysql::server mysql::ruby).each do |recipe|
   include_recipe recipe
 end
 # define mysql connection info

@@ -6,7 +6,7 @@ description      'Installs/Configures redmine'
 long_description IO.read(File.join(File.dirname(__FILE__), 'README.md'))
 version          '0.1.2'
 
-%w{
+%w(
   apt
   mysql
   database
@@ -15,7 +15,7 @@ version          '0.1.2'
   git
   nginx
   build-essential
-  }.each do |cb|
+  ).each do |cb|
   depends cb
 end
 

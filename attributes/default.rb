@@ -13,7 +13,7 @@ default['redmine']['revision'] = '12954'
 
 default['redmine']['environment'] = 'production'
 
-default['redmine']['packages'] = %w{libmagic-dev libmagickwand-dev libmysqlclient-dev}
+default['redmine']['packages'] = %w(libmagic-dev libmagickwand-dev libmysqlclient-dev)
 
 if node['platform'] == 'ubuntu' && node['platform_version'].to_f == 12.04
   default['redmine']['ruby_install'] = 'package'

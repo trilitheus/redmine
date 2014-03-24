@@ -11,7 +11,7 @@ describe 'redmine::deploy' do
     end.converge(described_recipe)
   end
 
-  %w{shared
+  %w(shared
      shared/config
      shared/log
      shared/pids
@@ -22,17 +22,17 @@ describe 'redmine::deploy' do
      shared/vendor
      shared/plugins
      shared/script
-    }.each do |dir|
+).each do |dir|
     it "should create redmine's shared directory #{dir}" do
       expect(chef_run).to create_directory("/srv/redmine/#{dir}").with(user: 'redmine', group: 'redmine')
     end
   end
 
-  %w{config/database.yml
+  %w(config/database.yml
      config/configuration.yml
      config/unicorn.rb
      script/web
-    }.each do |file|
+).each do |file|
     it "should render /srv/redmine/shared/#{file}" do
       expect(chef_run).to render_file("/srv/redmine/shared/#{file}")
     end

@@ -1,5 +1,5 @@
 # Create shared dirs and configs
-%w{/shared
+%w(/shared
    /shared/config
    /shared/log
    /shared/pids
@@ -9,7 +9,7 @@
    /shared/vendor
    /shared/plugins
    /shared/script
-  }.each do |dir|
+).each do |dir|
   directory node['redmine']['home'] + dir do
     owner node['redmine']['user']
     group node['redmine']['group']
@@ -70,7 +70,7 @@ deploy_revision node['redmine']['home'] do
 
   before_restart do
     execute 'load_default_data' do
-      environment ({ 'RAILS_ENV' => node['redmine']['environment'], 'REDMINE_LANG' => 'en-GB' })
+      environment('RAILS_ENV' => node['redmine']['environment'], 'REDMINE_LANG' => 'en-GB')
       user node['redmine']['user']
       group node['redmine']['group']
       cwd node['redmine']['home'] + '/releases/' + node['redmine']['revision']
@@ -96,7 +96,7 @@ deploy_revision node['redmine']['home'] do
   end
 
   action :deploy
-  purge_before_symlink %w{plugins tmp/sockets tmp/pids log}
+  purge_before_symlink %w(plugins tmp/sockets tmp/pids log)
   symlink_before_migrate 'config/configuration.yml' => 'config/configuration.yml',
                          'config/database.yml' => 'config/database.yml',
                          'config/unicorn.rb' => 'config/unicorn.rb',
