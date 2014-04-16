@@ -46,6 +46,7 @@ def install_redmine_plugin
   # We only support git as a plugin source for now
   case @plugin_source_type
   when 'git'
+    Chef::Log.info("GIT REPO IS SET TO #{@plugin_source}")
     git_checkout
     migrate_plugin
     bundler_run
