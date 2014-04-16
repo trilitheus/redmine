@@ -6,7 +6,7 @@ end
 gem_package 'mysql'
 
 mysql_connection_info = {
-  :host => '127.0.0.1',
+  :host => 'localhost',
   :username => 'root',
   :password => node['mysql']['server_root_password']
 }
