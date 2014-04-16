@@ -78,7 +78,15 @@ end
 
 def migrate_plugin
   execute 'plugin_migrate' do
-    environment 'RAILS_ENV' => node['redmine']['environment']
+    if Chef::Config[:http_proxy]
+      environment({
+        'RAILS_ENV' => node['redmine']['environment'],
+        'https_proxy' => Chef::Config[:https_proxy],
+        'http_proxy' => Chef::Config[:http_proxy]
+      })
+    else
+      environment 'RAILS_ENV' => node['redmine']['environment']
+    end
     user node['redmine']['user']
     group node['redmine']['group']
     cwd node['redmine']['home'] + '/current'
