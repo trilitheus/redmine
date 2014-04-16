@@ -44,13 +44,13 @@ end
 def install_redmine_plugin
   plugin_vars
   # We only support git as a plugin source for now
-  case plugin_source_type
+  case @plugin_source_type
   when 'git'
     git_checkout
     migrate_plugin
     bundler run
   else
-    Chef::Log.warn "#{plugin_source_type} not supported."
+    Chef::Log.warn "#{@plugin_source_type} not supported."
   end
 end
 
