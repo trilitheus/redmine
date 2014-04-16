@@ -48,7 +48,7 @@ def install_redmine_plugin
   when 'git'
     Chef::Log.info("GIT REPO IS SET TO #{@plugin_source}")
     Chef::Log.info("GIT REPO IS SET TO #{@new_resource.source}")
-    git_checkout
+    git_checkout(@plugin_source)
     migrate_plugin
     bundler_run
   else
@@ -64,9 +64,9 @@ def plugin_vars
   @plugin_restart_redmine = new_resource.restart_redmine
 end
 
-def git_checkout
+def git_checkout(src)
   git node['redmine']['home'] + '/shared/plugins/' + @plugin_name do
-    repository @new_resource.source
+    repository src
     user node['redmine']['user']
     group node['redmine']['group']
     action :checkout
