@@ -66,7 +66,7 @@ end
 
 def git_checkout
   git node['redmine']['home'] + '/shared/plugins/' + @plugin_name do
-    repository @plugin_source
+    repository @new_resource.source
     user node['redmine']['user']
     group node['redmine']['group']
     action :checkout
