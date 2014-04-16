@@ -20,7 +20,7 @@ end
 # create database user
 mysql_database_user node['redmine']['user'] do
   connection mysql_connection_info
-  password 'redmine'
+  password node['redmine']['dbpass']
   database_name node['redmine']['dbname']
   privileges [:all]
   action [:create, :grant]
