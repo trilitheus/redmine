@@ -42,7 +42,7 @@ def set_current_resources
 end
 
 def install_redmine_plugin
-  plugins_vars
+  plugin_vars
   # We only support git as a plugin source for now
   case plugin_source_type
   when 'git'
