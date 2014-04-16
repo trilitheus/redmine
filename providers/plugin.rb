@@ -48,7 +48,7 @@ def install_redmine_plugin
   when 'git'
     git_checkout
     migrate_plugin
-    bundler run
+    bundler_run
   else
     Chef::Log.warn "#{@plugin_source_type} not supported."
   end
@@ -68,8 +68,8 @@ def git_checkout
     user node['redmine']['user']
     group node['redmine']['group']
     action :checkout
-    notifies :run, 'execute[bundler_run]', :immediately if @plugin_run_bundler
-    notifies :run, 'execute[migrate_plugin]', :delayed
+    notifies :run, 'execute[run_bundler]', :immediately if @plugin_run_bundler
+    notifies :run, 'execute[plugin_migrate]', :delayed
     notifies :restart, 'service[redmine]', :delayed if @plugin_restart_redmine
   end
 end
