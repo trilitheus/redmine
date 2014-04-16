@@ -47,6 +47,7 @@ def install_redmine_plugin
   case @plugin_source_type
   when 'git'
     Chef::Log.info("GIT REPO IS SET TO #{@plugin_source}")
+    Chef::Log.info("GIT REPO IS SET TO #{@new_resource.source}")
     git_checkout
     migrate_plugin
     bundler_run
