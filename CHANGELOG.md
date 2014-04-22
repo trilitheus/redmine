@@ -1,6 +1,9 @@
 redmine Cookbook CHANGELOG
 ==========================
 This file is used to list changes made in each version of the redmine cookbook
+v0.1.3
+------
+* removed current part of app home in template directory as already specificed in recipe
 
 v0.1.1
 ------

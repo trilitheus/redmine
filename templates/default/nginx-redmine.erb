@@ -16,7 +16,7 @@ server {
   listen *:<%= @port %> default_server;
   server_name <%= @server_name %>;
   server_tokens off;
-  root <%= @redmine_app_home %>/current/public;
+  root <%= @redmine_app_home %>/public;
 
   location / {
     try_files $uri $uri/index.html $uri.html @redmine;
