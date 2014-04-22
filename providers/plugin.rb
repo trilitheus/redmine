@@ -49,8 +49,8 @@ def install_redmine_plugin
     Chef::Log.info("GIT REPO IS SET TO #{@plugin_source}")
     Chef::Log.info("GIT REPO IS SET TO #{@new_resource.source}")
     git_checkout(@plugin_source)
-    migrate_plugin
     bundler_run
+    migrate_plugin
   else
     Chef::Log.warn "#{@plugin_source_type} not supported."
   end
@@ -100,7 +100,7 @@ def bundler_run
     environment 'RAILS_ENV' => node['redmine']['environment']
     user node['redmine']['user']
     group node['redmine']['group']
-    cwd node['redmine']['home'] + '/current'
+    cwd node['redmine']['home'] + '/current/' + @plugin_name
     action :nothing
     command 'bundle install'
   end
