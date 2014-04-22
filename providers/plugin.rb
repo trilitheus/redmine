@@ -95,12 +95,12 @@ def migrate_plugin
   end
 end
 
-def bundler_run(pl_name)
+def bundler_run
   execute 'run_bundler' do
     environment 'RAILS_ENV' => node['redmine']['environment']
     user node['redmine']['user']
     group node['redmine']['group']
-    cwd node['redmine']['home'] + '/current/' + pl_name
+    cwd node['redmine']['home'] + '/current'
     action :nothing
     command 'bundle install'
   end
