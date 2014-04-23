@@ -1,5 +1,13 @@
 redmine Cookbook CHANGELOG
 ==========================
+v1.0.0
+------
+* Bumped to first release version
+
+v0.1.5
+------
+* Added SSL
+
 v0.1.4
 ------
 * Refactored pluin provider

@@ -20,3 +20,12 @@ if node['platform'] == 'ubuntu' && node['platform_version'].to_f == 12.04
 else
   default['redmine']['ruby_install'] = 'build'
 end
+
+default['redmine']['https'] = true
+default['redmine']['listen_ip'] = '*'
+default['redmine']['listen_port'] = nil
+
+default['redmine']['self_signed_cert'] = false
+default['redmine']['vault_name'] = 'certificates'
+default['redmine']['ssl_crt'] = 'star_ad_lancscc_net.crt'
+default['redmine']['ssl_key'] = 'star_ad_lancscc_net.key'

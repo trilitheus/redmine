@@ -24,16 +24,16 @@ action :install do
           cwd node['redmine']['home'] + '/current'
           action :run
           command 'bundle install'
-          only_if new_resource.run_bundler
+          only_if { new_resource.run_bundler }
         end
 
         execute "plugin_migrate_#{new_resource.name}" do
           if Chef::Config[:http_proxy]
-            environment({
-              'RAILS_ENV' => node['redmine']['environment'],
-              'https_proxy' => Chef::Config[:https_proxy],
-              'http_proxy' => Chef::Config[:http_proxy]
-            })
+            environment(
+                          'RAILS_ENV' => node['redmine']['environment'],
+                          'https_proxy' => Chef::Config[:https_proxy],
+                          'http_proxy' => Chef::Config[:http_proxy]
+            )
           else
             environment 'RAILS_ENV' => node['redmine']['environment']
           end
@@ -42,7 +42,7 @@ action :install do
           cwd node['redmine']['home'] + '/current'
           command 'bundle exec rake redmine:plugins:migrate'
           action :run
-          only_if new_resource.run_migrations
+          only_if { new_resource.run_migrations }
         end
       else
         Chef::Log.warn("Only source_type of git is currently supported - you specified #{new_resource.source_type}")
@@ -64,7 +64,7 @@ end
 def load_current_resource
   set_current_resources
 
-  if plugin_exists?(@current_resource.name)
+  if plugin_exists?
     # TODO; populate @current_resource from existing plugin_dir
     @current_resource.exists = true
   end
@@ -80,7 +80,7 @@ def set_current_resources
   @current_resource.run_migrations(new_resource.run_migrations) || false
 end
 
-def plugin_exists?(name)
-  Chef::Log.debug "Checking if redmine plugin #{name} exists..."
-  ::File.directory?(node['redmine']['home'] + '/shared/plugins/' + name)
+def plugin_exists?
+  Chef::Log.debug "Checking if redmine plugin #{new_resource.name} exists..."
+  ::File.directory?(node['redmine']['home'] + '/shared/plugins/' + new_resource.name)
 end
