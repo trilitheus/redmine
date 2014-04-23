@@ -4,11 +4,49 @@ def whyrun_supported?
 end
 
 action :install do
-  if @current_resource.exists
-    Chef::Log.info "#{ new_resource } already exists - nothing to do."
-  else
+  unless plugin_exists?
     converge_by("Install #{ new_resource }") do
-      install_redmine_plugin
+      if new_resource.source_type == 'git'
+        Chef::Log.info("GIT REPO IS SET TO #{new_resource.source}")
+
+        git node['redmine']['home'] + '/shared/plugins/' + new_resource.name do
+          repository new_resource.source
+          user node['redmine']['user']
+          group node['redmine']['group']
+          action :checkout
+          notifies :restart, 'service[redmine]', :delayed if new_resource.restart_redmine
+        end
+
+        execute "run_bundler_#{new_resource.name}" do
+          environment 'RAILS_ENV' => node['redmine']['environment']
+          user node['redmine']['user']
+          group node['redmine']['group']
+          cwd node['redmine']['home'] + '/current'
+          action :run
+          command 'bundle install'
+          only_if new_resource.run_bundler
+        end
+
+        execute "plugin_migrate_#{new_resource.name}" do
+          if Chef::Config[:http_proxy]
+            environment({
+              'RAILS_ENV' => node['redmine']['environment'],
+              'https_proxy' => Chef::Config[:https_proxy],
+              'http_proxy' => Chef::Config[:http_proxy]
+            })
+          else
+            environment 'RAILS_ENV' => node['redmine']['environment']
+          end
+          user node['redmine']['user']
+          group node['redmine']['group']
+          cwd node['redmine']['home'] + '/current'
+          command 'bundle exec rake redmine:plugins:migrate'
+          action :run
+          only_if new_resource.run_migrations
+        end
+      else
+        Chef::Log.warn("Only source_type of git is currently supported - you specified #{new_resource.source_type}")
+      end
     end
   end
 end
@@ -39,71 +77,7 @@ def set_current_resources
   @current_resource.source_type(new_resource.source_type) || 'git'
   @current_resource.run_bundler(new_resource.run_bundler) || false
   @current_resource.restart_redmine(new_resource.restart_redmine) || false
-end
-
-def install_redmine_plugin
-  plugin_vars
-  # We only support git as a plugin source for now
-  case @plugin_source_type
-  when 'git'
-    Chef::Log.info("GIT REPO IS SET TO #{@plugin_source}")
-    Chef::Log.info("GIT REPO IS SET TO #{@new_resource.source}")
-    git_checkout(@plugin_source)
-    bundler_run(@plugin_name)
-    migrate_plugin
-  else
-    Chef::Log.warn "#{@plugin_source_type} not supported."
-  end
-end
-
-def plugin_vars
-  @plugin_name = new_resource.name
-  @plugin_source = new_resource.source
-  @plugin_source_type = new_resource.source_type
-  @plugin_run_bundler = new_resource.run_bundler
-  @plugin_restart_redmine = new_resource.restart_redmine
-end
-
-def git_checkout(src)
-  git node['redmine']['home'] + '/shared/plugins/' + @plugin_name do
-    repository src
-    user node['redmine']['user']
-    group node['redmine']['group']
-    action :checkout
-    notifies :run, 'execute[run_bundler]', :immediately if @plugin_run_bundler
-    notifies :run, 'execute[plugin_migrate]', :delayed
-    notifies :restart, 'service[redmine]', :delayed if @plugin_restart_redmine
-  end
-end
-
-def migrate_plugin
-  execute 'plugin_migrate' do
-    if Chef::Config[:http_proxy]
-      environment({
-        'RAILS_ENV' => node['redmine']['environment'],
-        'https_proxy' => Chef::Config[:https_proxy],
-        'http_proxy' => Chef::Config[:http_proxy]
-      })
-    else
-      environment 'RAILS_ENV' => node['redmine']['environment']
-    end
-    user node['redmine']['user']
-    group node['redmine']['group']
-    cwd node['redmine']['home'] + '/current'
-    command 'bundle exec rake redmine:plugins:migrate'
-    action :nothing
-  end
-end
-
-def bundler_run
-  execute 'run_bundler' do
-    environment 'RAILS_ENV' => node['redmine']['environment']
-    user node['redmine']['user']
-    group node['redmine']['group']
-    cwd node['redmine']['home'] + '/current'
-    action :nothing
-    command 'bundle install'
-  end
+  @current_resource.run_migrations(new_resource.run_migrations) || false
 end
 
 def plugin_exists?(name)
