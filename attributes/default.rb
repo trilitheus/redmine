@@ -21,11 +21,11 @@ else
   default['redmine']['ruby_install'] = 'build'
 end
 
-default['redmine']['https'] = true
+default['redmine']['https'] = false
 default['redmine']['listen_ip'] = '*'
 default['redmine']['listen_port'] = nil
 
 default['redmine']['self_signed_cert'] = false
-default['redmine']['vault_name'] = 'certificates'
-default['redmine']['ssl_crt'] = 'star_ad_lancscc_net.crt'
-default['redmine']['ssl_key'] = 'star_ad_lancscc_net.key'
+default['redmine']['vault_name'] = ''
+default['redmine']['ssl_crt'] = ''
+default['redmine']['ssl_key'] = ''
