@@ -1,5 +1,9 @@
 redmine Cookbook CHANGELOG
 ==========================
+v1.0.1
+------
+* added settings.yml to be managed
+
 v1.0.0
 ------
 * Bumped to first release version

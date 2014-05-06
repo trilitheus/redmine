@@ -16,6 +16,18 @@
   end
 end
 
+# Create the settings file
+template node['redmine']['home'] + '/shared/config/settings.yml' do
+  owner node['redmine']['user']
+  group node['redmine']['group']
+  mode '640'
+  variables(
+    :weburl => node['redmine']['web_url']
+  )
+  action :create
+end
+
+
 # Create the database config
 template node['redmine']['home']  + '/shared/config/database.yml' do
   owner node['redmine']['user']
@@ -99,6 +111,7 @@ deploy_revision node['redmine']['home'] do
   purge_before_symlink %w(plugins tmp/sockets tmp/pids log)
   symlink_before_migrate 'config/configuration.yml' => 'config/configuration.yml',
                          'config/database.yml' => 'config/database.yml',
+                         'config/settings.yml' => 'config/settings.yml',
                          'config/unicorn.rb' => 'config/unicorn.rb',
                          'script/web' => 'script/web',
                          'vendor/ruby' => 'vendor/ruby',
