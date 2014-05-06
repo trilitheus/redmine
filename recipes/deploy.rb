@@ -16,6 +16,14 @@
   end
 end
 
+# Create the locale file
+template node['redmine']['home'] + '/shared/config/en-GB.yml' do
+  owner node['redmine']['user']
+  group node['redmine']['group']
+  mode '640'
+  action :create
+end
+
 # Create the settings file
 template node['redmine']['home'] + '/shared/config/settings.yml' do
   owner node['redmine']['user']
