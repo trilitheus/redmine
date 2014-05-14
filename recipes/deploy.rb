@@ -121,7 +121,7 @@ deploy_revision node['redmine']['home'] do
                          'config/database.yml' => 'config/database.yml',
                          'config/settings.yml' => 'config/settings.yml',
                          'config/unicorn.rb' => 'config/unicorn.rb',
-                         'config/en-GB.yml.rb' => 'config/locales/en-GB.yml',
+                         'config/en-GB.yml' => 'config/locales/en-GB.yml',
                          'script/web' => 'script/web',
                          'vendor/ruby' => 'vendor/ruby',
                          'plugins' => 'plugins'
