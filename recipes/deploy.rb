@@ -35,7 +35,6 @@ template node['redmine']['home'] + '/shared/config/settings.yml' do
   action :create
 end
 
-
 # Create the database config
 template node['redmine']['home']  + '/shared/config/database.yml' do
   owner node['redmine']['user']
