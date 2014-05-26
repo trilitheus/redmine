@@ -8,7 +8,6 @@ version          '1.0.1'
 
 %w(
   apt
-  mysql
   database
   subversion
   ruby_build
@@ -20,3 +19,4 @@ version          '1.0.1'
 end
 
 depends 'ohai', '~> 1.1.10'
+depends 'mysql' '~> 3.0.2'
