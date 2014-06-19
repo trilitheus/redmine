@@ -11,6 +11,7 @@ action :install do
 
         git node['redmine']['home'] + '/shared/plugins/' + new_resource.name do
           repository new_resource.source
+          revision new_resource.revision
           user node['redmine']['user']
           group node['redmine']['group']
           action :checkout
@@ -74,6 +75,7 @@ def set_current_resources
   @current_resource = Chef::Resource::RedminePlugin.new(new_resource.name)
   @current_resource.name(new_resource.name)
   @current_resource.source(new_resource.source)
+  @current_resource.revision(new_resource.revision) || 'master'
   @current_resource.source_type(new_resource.source_type) || 'git'
   @current_resource.run_bundler(new_resource.run_bundler) || false
   @current_resource.restart_redmine(new_resource.restart_redmine) || false

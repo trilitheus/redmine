@@ -11,6 +11,9 @@ attribute :source,          :kind_of => String,
 attribute :source_type,     :kind_of => String,
                             :default => 'git'
 
+attribute :revision,        :kind_of => String,
+                            :default => 'master'
+
 attribute :run_bundler,     :kind_of => [TrueClass, FalseClass],
                             :default => false
 
