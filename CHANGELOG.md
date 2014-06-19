@@ -1,5 +1,9 @@
 redmine Cookbook CHANGELOG
 ==========================
+v1.0.3
+------
+* templated the protocol (http or https) into settings.yml template
+
 v1.0.2
 ------
 * removed disable of nginx default site
