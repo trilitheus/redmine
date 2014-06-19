@@ -38,6 +38,7 @@ template node['redmine']['home'] + '/shared/config/settings.yml' do
     :inactivity_timeout => node['redmine']['inactivity_timeout']
   )
   action :create
+  notifies :restart, 'service[redmine]'
 end
 
 # Create the database config
