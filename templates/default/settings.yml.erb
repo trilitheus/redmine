@@ -43,7 +43,7 @@ session_lifetime:
 # User session timeout in minutes
 session_timeout:
   format: int
-  default: 0
+  default: <%= inactivity_timeout %>
 attachment_max_size:
   format: int
   default: 5120

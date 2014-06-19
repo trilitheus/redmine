@@ -34,7 +34,8 @@ template node['redmine']['home'] + '/shared/config/settings.yml' do
   mode '640'
   variables(
     :weburl => node['redmine']['web_url'],
-    :protocol => protocol
+    :protocol => protocol,
+    :inactivity_timeout => node['redmine']['inactivity_timeout']
   )
   action :create
 end
