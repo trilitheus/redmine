@@ -1,5 +1,9 @@
 redmine Cookbook CHANGELOG
 ==========================
+v1.0.2
+------
+* removed disable of nginx default site
+
 v1.0.1
 ------
 * added settings.yml to be managed

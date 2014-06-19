@@ -42,10 +42,6 @@ nginx_site 'redmine' do
   enable true
 end
 
-nginx_site 'default' do
-  enable false
-end
-
 template '/etc/init.d/redmine' do
   owner node['redmine']['user']
   group node['redmine']['group']
