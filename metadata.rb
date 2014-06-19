@@ -19,4 +19,4 @@ version          '1.0.2'
 end
 
 depends 'ohai', '~> 1.1.10'
-depends 'mysql' '~> 3.0.2'
+depends 'mysql', '~> 3.0.2'
