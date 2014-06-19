@@ -24,13 +24,17 @@ template node['redmine']['home'] + '/shared/config/en-GB.yml' do
   action :create
 end
 
+# Set protocol to https or http
+protocol = (node['redmine']['https'] ? 'https' : 'http')
+
 # Create the settings file
 template node['redmine']['home'] + '/shared/config/settings.yml' do
   owner node['redmine']['user']
   group node['redmine']['group']
   mode '640'
   variables(
-    :weburl => node['redmine']['web_url']
+    :weburl => node['redmine']['web_url'],
+    :protocol => protocol
   )
   action :create
 end
