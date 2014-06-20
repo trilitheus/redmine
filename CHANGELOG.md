@@ -1,5 +1,9 @@
 redmine Cookbook CHANGELOG
 ==========================
+v1.1.0
+------
+* Added ability to specify revision for redmine plugins - tagged at 1.1.0
+
 v1.0.4
 ------
 * attributised the inactivity_timeout into settings.yml template
