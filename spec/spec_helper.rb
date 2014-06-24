@@ -2,7 +2,6 @@ require 'chefspec'
 require 'chefspec/berkshelf'
 
 RSpec.configure do |config|
-  config.color_enabled = true
   config.tty = true
   config.log_level = :error
   config.formatter = :documentation
@@ -13,4 +12,4 @@ RSpec.configure do |config|
   end
 end
 
-# at_exit { ChefSpec::Coverage.report! }
+at_exit { ChefSpec::Coverage.report! }
