@@ -54,8 +54,3 @@ template '/etc/init.d/redmine' do
     :redmineuser => node['redmine']['user']
   )
 end
-
-service 'redmine' do
-  supports restart: true, reload: true
-  action [:enable, :start]
-end

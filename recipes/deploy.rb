@@ -136,3 +136,8 @@ deploy_revision node['redmine']['home'] do
            'sockets' => 'tmp/sockets',
            'log' => 'log'
 end
+
+service 'redmine' do
+  supports restart: true, reload: true
+  action [:enable, :start]
+end
