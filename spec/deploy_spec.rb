@@ -38,4 +38,12 @@ describe 'redmine::deploy' do
     end
   end
 
+  it 'should enable the redmine service' do
+    expect(chef_run).to enable_service('redmine')
+  end
+
+  it 'should start the redmine service' do
+    expect(chef_run).to start_service('redmine')
+  end
+
 end
