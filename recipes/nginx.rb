@@ -10,17 +10,18 @@ directory '/etc/nginx/ssl' do
   action :create
 end
 
-chef_vault_file "/etc/nginx/ssl/#{node['redmine']['ssl_key']}" do
-  vault_name node['redmine']['vault_name']
-  vault_item node['redmine']['ssl_key'].gsub('.', '_')
-  only_if node['redmine']['https'] == false
-end
+# @todo Need to move these out to a wrapper
+# chef_vault_file "/etc/nginx/ssl/#{node['redmine']['ssl_key']}" do
+#   vault_name node['redmine']['vault_name']
+#   vault_item node['redmine']['ssl_key'].gsub('.', '_')
+#   only_if node['redmine']['https'] == false
+# end
 
-chef_vault_file "/etc/nginx/ssl/#{node['redmine']['ssl_crt']}" do
-  vault_name node['redmine']['vault_name']
-  vault_item node['redmine']['ssl_crt'].gsub('.', '_')
-  only_if node['redmine']['https'] == false
-end
+# chef_vault_file "/etc/nginx/ssl/#{node['redmine']['ssl_crt']}" do
+#   vault_name node['redmine']['vault_name']
+#   vault_item node['redmine']['ssl_crt'].gsub('.', '_')
+#   only_if node['redmine']['https'] == false
+# end
 
 template '/etc/nginx/sites-available/redmine' do
   owner 'root'
