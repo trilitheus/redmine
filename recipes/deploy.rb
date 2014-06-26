@@ -131,7 +131,7 @@ deploy_revision node['redmine']['home'] do
                          'script/web' => 'script/web',
                          'vendor/ruby' => 'vendor/ruby',
                          'plugins' => 'plugins',
-                         'public/themes' => 'public/themes'
+                         'themes' => 'public/themes'
 
   symlinks 'system' => 'public/system',
            'pids' => 'tmp/pids',
