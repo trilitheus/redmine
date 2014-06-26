@@ -9,6 +9,7 @@
    /shared/vendor
    /shared/plugins
    /shared/script
+   /shared/themes
 ).each do |dir|
   directory node['redmine']['home'] + dir do
     owner node['redmine']['user']
@@ -129,7 +130,8 @@ deploy_revision node['redmine']['home'] do
                          'config/en-GB.yml' => 'config/locales/en-GB.yml',
                          'script/web' => 'script/web',
                          'vendor/ruby' => 'vendor/ruby',
-                         'plugins' => 'plugins'
+                         'plugins' => 'plugins',
+                         'themes' => 'config/themes'
 
   symlinks 'system' => 'public/system',
            'pids' => 'tmp/pids',
