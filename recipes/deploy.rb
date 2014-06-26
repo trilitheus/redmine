@@ -122,7 +122,7 @@ deploy_revision node['redmine']['home'] do
   end
 
   action node['redmine']['deploy_action']
-  purge_before_symlink %w(plugins tmp/sockets tmp/pids log)
+  purge_before_symlink %w(plugins tmp/sockets tmp/pids log public/themes)
   symlink_before_migrate 'config/configuration.yml' => 'config/configuration.yml',
                          'config/database.yml' => 'config/database.yml',
                          'config/settings.yml' => 'config/settings.yml',
@@ -131,7 +131,7 @@ deploy_revision node['redmine']['home'] do
                          'script/web' => 'script/web',
                          'vendor/ruby' => 'vendor/ruby',
                          'plugins' => 'plugins',
-                         'themes' => 'config/themes'
+                         'public/themes' => 'public/themes'
 
   symlinks 'system' => 'public/system',
            'pids' => 'tmp/pids',
