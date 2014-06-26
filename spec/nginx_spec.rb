@@ -16,11 +16,11 @@ describe 'redmine::nginx' do
   end
 
   it 'should create the nginx virtualhost file' do
-    expect(chef_run).to render_file('/etc/nginx/sites-available/redmine')
+    expect(chef_run).to create_template('/etc/nginx/sites-available/redmine')
   end
 
-  it 'should render the redmine init script' do
-    expect(chef_run).to render_file('/etc/init.d/redmine')
+  it 'create the directory /etc/nginx/ssl' do
+    expect(chef_run).to create_directory('/etc/nginx/ssl')
   end
 
 end

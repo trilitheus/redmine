@@ -44,13 +44,3 @@ include_recipe 'nginx'
 nginx_site 'redmine' do
   enable true
 end
-
-template '/etc/init.d/redmine' do
-  owner node['redmine']['user']
-  group node['redmine']['group']
-  mode '750'
-  variables(
-    :redmine_app_home => node['redmine']['home'] + '/current',
-    :redmineuser => node['redmine']['user']
-  )
-end

@@ -19,7 +19,6 @@ describe 'redmine::deploy' do
      shared/sockets
      shared/files
      shared/vendor
-     shared/vendor
      shared/plugins
      shared/script
 ).each do |dir|
@@ -31,11 +30,20 @@ describe 'redmine::deploy' do
   %w(config/database.yml
      config/configuration.yml
      config/unicorn.rb
-     script/web
+     config/en-GB.yml
+     config/settings.yml
 ).each do |file|
-    it "should render /srv/redmine/shared/#{file}" do
-      expect(chef_run).to render_file("/srv/redmine/shared/#{file}")
+    it "should create_template /srv/redmine/shared/#{file}" do
+      expect(chef_run).to create_template("/srv/redmine/shared/#{file}")
     end
+  end
+
+  it 'should create cookbook_file /srv/redmine/shared/script/web' do
+    expect(chef_run).to create_cookbook_file('/srv/redmine/shared/script/web')
+  end
+
+  it 'should create_template the redmine init script' do
+    expect(chef_run).to create_template('/etc/init.d/redmine')
   end
 
   it 'should enable the redmine service' do
