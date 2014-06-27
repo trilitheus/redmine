@@ -11,6 +11,8 @@ default['redmine']['version'] = '2.5-stable'
 default['redmine']['url'] = 'http://svn.redmine.org/redmine/branches/' + node['redmine']['version']
 default['redmine']['revision'] = '12954'
 
+default['redmine']['deploy_action'] = :deploy
+
 default['redmine']['environment'] = 'production'
 
 ## The following is inactivity in minutes or 0 to disable.

@@ -1,5 +1,10 @@
 redmine Cookbook CHANGELOG
 ==========================
+v1.2.0
+------
+* Removed any chef-vault reference - deal with in a wrapper as we don't want to be too opinionated about
+  people having to use chef-vault in place of traditional encrypted data bags or another method.
+
 v1.1.0
 ------
 * Added ability to specify revision for redmine plugins - tagged at 1.1.0

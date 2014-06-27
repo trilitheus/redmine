@@ -9,6 +9,7 @@
    /shared/vendor
    /shared/plugins
    /shared/script
+   /shared/themes
 ).each do |dir|
   directory node['redmine']['home'] + dir do
     owner node['redmine']['user']
@@ -120,8 +121,8 @@ deploy_revision node['redmine']['home'] do
     end
   end
 
-  action :deploy
-  purge_before_symlink %w(plugins tmp/sockets tmp/pids log)
+  action node['redmine']['deploy_action']
+  purge_before_symlink %w(plugins tmp/sockets tmp/pids log public/themes)
   symlink_before_migrate 'config/configuration.yml' => 'config/configuration.yml',
                          'config/database.yml' => 'config/database.yml',
                          'config/settings.yml' => 'config/settings.yml',
@@ -129,12 +130,23 @@ deploy_revision node['redmine']['home'] do
                          'config/en-GB.yml' => 'config/locales/en-GB.yml',
                          'script/web' => 'script/web',
                          'vendor/ruby' => 'vendor/ruby',
-                         'plugins' => 'plugins'
+                         'plugins' => 'plugins',
+                         'themes' => 'public/themes'
 
   symlinks 'system' => 'public/system',
            'pids' => 'tmp/pids',
            'sockets' => 'tmp/sockets',
            'log' => 'log'
+end
+
+template '/etc/init.d/redmine' do
+  owner node['redmine']['user']
+  group node['redmine']['group']
+  mode '750'
+  variables(
+    :redmine_app_home => node['redmine']['home'] + '/current',
+    :redmineuser => node['redmine']['user']
+  )
 end
 
 service 'redmine' do

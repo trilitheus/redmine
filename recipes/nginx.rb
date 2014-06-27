@@ -10,19 +10,6 @@ directory '/etc/nginx/ssl' do
   action :create
 end
 
-# @todo Need to move these out to a wrapper
-# chef_vault_file "/etc/nginx/ssl/#{node['redmine']['ssl_key']}" do
-#   vault_name node['redmine']['vault_name']
-#   vault_item node['redmine']['ssl_key'].gsub('.', '_')
-#   only_if node['redmine']['https'] == false
-# end
-
-# chef_vault_file "/etc/nginx/ssl/#{node['redmine']['ssl_crt']}" do
-#   vault_name node['redmine']['vault_name']
-#   vault_item node['redmine']['ssl_crt'].gsub('.', '_')
-#   only_if node['redmine']['https'] == false
-# end
-
 template '/etc/nginx/sites-available/redmine' do
   owner 'root'
   group 'root'
@@ -43,14 +30,4 @@ include_recipe 'nginx'
 
 nginx_site 'redmine' do
   enable true
-end
-
-template '/etc/init.d/redmine' do
-  owner node['redmine']['user']
-  group node['redmine']['group']
-  mode '750'
-  variables(
-    :redmine_app_home => node['redmine']['home'] + '/current',
-    :redmineuser => node['redmine']['user']
-  )
 end
