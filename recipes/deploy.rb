@@ -92,7 +92,7 @@ deploy_revision node['redmine']['home'] do
   scm_provider Chef::Provider::Subversion
 
   migrate true
-  migration_command "cd #{node['redmine']['home']}/releases/#{node['redmine']['revision']}; bundle exec rake db:migrate --trace"
+  migration_command "cd #{node['redmine']['home']}/releases/#{node['redmine']['revision']}; bundle exec rake db:migrate"
 
   before_restart do
     execute 'load_default_data' do
@@ -100,7 +100,14 @@ deploy_revision node['redmine']['home'] do
       user node['redmine']['user']
       group node['redmine']['group']
       cwd node['redmine']['home'] + '/releases/' + node['redmine']['revision']
-      command 'bundle exec rake redmine:load_default_data --trace'
+      command 'bundle exec rake redmine:load_default_data'
+    execute 'generate_secret_token' do
+      environment('RAILS_ENV' => node['redmine']['environment'], 'REDMINE_LANG' => 'en-GB')
+      user node['redmine']['user']
+      group node['redmine']['group']
+      cwd node['redmine']['home'] + '/releases/' + node['redmine']['revision']
+      command 'bundle exec rake generate_secret_token'
+    end
     end
   end
 
