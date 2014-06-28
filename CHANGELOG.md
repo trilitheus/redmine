@@ -1,5 +1,9 @@
 redmine Cookbook CHANGELOG
 ==========================
+v1.2.1
+------
+* Removed any chef-vault reference - deal with in a wrapper as we don't want to be too opinionated about
+
 v1.2.0
 ------
 * Removed any chef-vault reference - deal with in a wrapper as we don't want to be too opinionated about
