@@ -17,6 +17,17 @@
   end
 end
 
+# Deploy startup script
+template '/etc/init.d/redmine' do
+  owner node['redmine']['user']
+  group node['redmine']['group']
+  mode '750'
+  variables(
+    :redmine_app_home => node['redmine']['home'] + '/current',
+    :redmineuser => node['redmine']['user']
+  )
+end
+
 # Create the locale file
 template node['redmine']['home'] + '/shared/config/en-GB.yml' do
   owner node['redmine']['user']
@@ -101,13 +112,13 @@ deploy_revision node['redmine']['home'] do
       group node['redmine']['group']
       cwd node['redmine']['home'] + '/releases/' + node['redmine']['revision']
       command 'bundle exec rake redmine:load_default_data'
+    end
     execute 'generate_secret_token' do
       environment('RAILS_ENV' => node['redmine']['environment'], 'REDMINE_LANG' => 'en-GB')
       user node['redmine']['user']
       group node['redmine']['group']
       cwd node['redmine']['home'] + '/releases/' + node['redmine']['revision']
       command 'bundle exec rake generate_secret_token'
-    end
     end
   end
 
@@ -144,16 +155,6 @@ deploy_revision node['redmine']['home'] do
            'pids' => 'tmp/pids',
            'sockets' => 'tmp/sockets',
            'log' => 'log'
-end
-
-template '/etc/init.d/redmine' do
-  owner node['redmine']['user']
-  group node['redmine']['group']
-  mode '750'
-  variables(
-    :redmine_app_home => node['redmine']['home'] + '/current',
-    :redmineuser => node['redmine']['user']
-  )
 end
 
 service 'redmine' do

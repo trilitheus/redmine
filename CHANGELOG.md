@@ -1,5 +1,9 @@
 redmine Cookbook CHANGELOG
 ==========================
+v1.2.2
+------
+* Fixed do end issues
+
 v1.2.1
 ------
 * Removed any chef-vault reference - deal with in a wrapper as we don't want to be too opinionated about
